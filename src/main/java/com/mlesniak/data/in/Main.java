@@ -32,10 +32,15 @@ public class Main implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try {
+            generateAvro();
             hdfsWrite();
         } catch (Exception e) {
             log.error("Exception: {}", e.getMessage());
         }
+    }
+
+    private void generateAvro() {
+
     }
 
     private void hdfsWrite() throws IOException, URISyntaxException {

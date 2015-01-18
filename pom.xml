@@ -17,6 +17,8 @@
     <properties>
         <hadoop.version>2.6.0</hadoop.version>
         <hadoop-core.version>1.2.1</hadoop-core.version>
+        <parquet.version>1.6.0rc4</parquet.version>
+        <avro.version>1.7.7</avro.version>
     </properties>
 
     <dependencies>
@@ -24,6 +26,19 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <!--Schema definition for data serialization.-->
+        <dependency>
+            <!--We use Avro as the internal schema definition format.-->
+            <groupId>com.twitter</groupId>
+            <artifactId>parquet-avro</artifactId>
+            <version>${parquet.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>${avro.version}</version>
         </dependency>
 
         <!--HDFS storage.-->
