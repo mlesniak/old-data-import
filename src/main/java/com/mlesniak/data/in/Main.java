@@ -12,9 +12,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
 
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 @SpringBootApplication
 public class Main implements CommandLineRunner {
@@ -29,6 +31,14 @@ public class Main implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        try {
+            hdfsWrite();
+        } catch (Exception e) {
+            log.error("Exception: {}", e.getMessage());
+        }
+    }
+
+    private void hdfsWrite() throws IOException, URISyntaxException {
         log.info("Application started");
 
         String hdfsServer = env.getProperty("hdfsServer");
