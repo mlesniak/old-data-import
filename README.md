@@ -2,6 +2,10 @@
 
 Small example to write a file to HDFS.
 
+## Schema and class generation
+
+The schema is defined in src/main/avro/table.avsc, generation with mvn generate-sources
+
 ## Problems and solutions
 
 **Exception: Caused by: org.apache.hadoop.ipc.RemoteException: Permission denied**

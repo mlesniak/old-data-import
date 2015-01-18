@@ -1,0 +1,16 @@
+{"namespace": "com.mlesniak.data.in.schema",
+ "type": "record",
+ "name": "Table",
+ "fields": [
+     {"name": "column0", "type": ["string", "null"]},
+     {"name": "column1", "type": ["string", "null"]},
+     {"name": "column2", "type": ["string", "null"]},
+     {"name": "column3", "type": ["string", "null"]},
+     {"name": "column4", "type": ["string", "null"]},
+     {"name": "column5", "type": ["string", "null"]},
+     {"name": "column6", "type": ["string", "null"]},
+     {"name": "column7", "type": ["string", "null"]},
+     {"name": "column8", "type": ["string", "null"]},
+     {"name": "column9", "type": ["string", "null"]}
+ ]
+}

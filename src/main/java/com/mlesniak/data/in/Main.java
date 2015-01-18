@@ -1,5 +1,9 @@
 package com.mlesniak.data.in;
 
+import com.mlesniak.data.in.schema.Table;
+import org.apache.avro.file.DataFileWriter;
+import org.apache.avro.io.DatumWriter;
+import org.apache.avro.specific.SpecificDatumWriter;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -11,10 +15,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -32,18 +34,31 @@ public class Main implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try {
-            generateAvro();
-            hdfsWrite();
+            OutputStream outputStream = getHDFSOutputStream();
+            writeAvroFile(outputStream);
+            outputStream.close();
+            log.info("Done.");
         } catch (Exception e) {
             log.error("Exception: {}", e.getMessage());
         }
     }
 
-    private void generateAvro() {
+    private void writeAvroFile(OutputStream out) throws IOException {
+        log.info("Creating object");
+        Table table = new Table();
+        table.setColumn0("value-0");
+        table.setColumn1("value-1");
+        log.info("Object: {}", table.toString());
 
+        log.info("Writing to stream");
+        DatumWriter<Table> tableDatumWriter = new SpecificDatumWriter<>(Table.class);
+        DataFileWriter<Table> fileWriter = new DataFileWriter<>(tableDatumWriter);
+        fileWriter.create(table.getSchema(), out);
+        fileWriter.append(table);
+        fileWriter.close();
     }
 
-    private void hdfsWrite() throws IOException, URISyntaxException {
+    private OutputStream getHDFSOutputStream() throws IOException, URISyntaxException {
         log.info("Application started");
 
         String hdfsServer = env.getProperty("hdfsServer");
@@ -62,12 +77,7 @@ public class Main implements CommandLineRunner {
             hdfs.delete(file, true);
         }
 
-        log.info("Creating file");
-        OutputStream os = hdfs.create(file);
-        BufferedWriter br = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-        br.write(content);
-        br.close();
-        hdfs.close();
-        log.info("Bye");
+        log.info("Creating stream for file");
+        return hdfs.create(file);
     }
 }
