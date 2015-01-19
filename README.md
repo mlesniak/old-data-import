@@ -1,10 +1,14 @@
 # Introduction
 
-Small example to write a file to HDFS.
+Small example to write a file to HDFS with parquet.
 
 ## Schema and class generation
 
 The schema is defined in src/main/avro/table.avsc, generation with mvn generate-sources
+
+## Viewing
+
+Use https://github.com/Parquet/parquet-mr/tree/master/parquet-tools to show the compressed parquet file.
 
 ## Problems and solutions
 
