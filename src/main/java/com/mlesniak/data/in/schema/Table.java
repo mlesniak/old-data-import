@@ -7,18 +7,18 @@ package com.mlesniak.data.in.schema;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Table extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Table\",\"namespace\":\"com.mlesniak.data.in.schema\",\"fields\":[{\"name\":\"column0\",\"type\":[\"string\",\"null\"]},{\"name\":\"column1\",\"type\":[\"string\",\"null\"]},{\"name\":\"column2\",\"type\":[\"string\",\"null\"]},{\"name\":\"column3\",\"type\":[\"string\",\"null\"]},{\"name\":\"column4\",\"type\":[\"string\",\"null\"]},{\"name\":\"column5\",\"type\":[\"string\",\"null\"]},{\"name\":\"column6\",\"type\":[\"string\",\"null\"]},{\"name\":\"column7\",\"type\":[\"string\",\"null\"]},{\"name\":\"column8\",\"type\":[\"string\",\"null\"]},{\"name\":\"column9\",\"type\":[\"string\",\"null\"]}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Table\",\"namespace\":\"com.mlesniak.data.in.schema\",\"fields\":[{\"name\":\"column0\",\"type\":[\"int\",\"null\"]},{\"name\":\"column1\",\"type\":[\"int\",\"null\"]},{\"name\":\"column2\",\"type\":[\"int\",\"null\"]},{\"name\":\"column3\",\"type\":[\"int\",\"null\"]},{\"name\":\"column4\",\"type\":[\"int\",\"null\"]},{\"name\":\"column5\",\"type\":[\"int\",\"null\"]},{\"name\":\"column6\",\"type\":[\"int\",\"null\"]},{\"name\":\"column7\",\"type\":[\"int\",\"null\"]},{\"name\":\"column8\",\"type\":[\"int\",\"null\"]},{\"name\":\"column9\",\"type\":[\"int\",\"null\"]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
-  @Deprecated public java.lang.CharSequence column0;
-  @Deprecated public java.lang.CharSequence column1;
-  @Deprecated public java.lang.CharSequence column2;
-  @Deprecated public java.lang.CharSequence column3;
-  @Deprecated public java.lang.CharSequence column4;
-  @Deprecated public java.lang.CharSequence column5;
-  @Deprecated public java.lang.CharSequence column6;
-  @Deprecated public java.lang.CharSequence column7;
-  @Deprecated public java.lang.CharSequence column8;
-  @Deprecated public java.lang.CharSequence column9;
+  @Deprecated public java.lang.Integer column0;
+  @Deprecated public java.lang.Integer column1;
+  @Deprecated public java.lang.Integer column2;
+  @Deprecated public java.lang.Integer column3;
+  @Deprecated public java.lang.Integer column4;
+  @Deprecated public java.lang.Integer column5;
+  @Deprecated public java.lang.Integer column6;
+  @Deprecated public java.lang.Integer column7;
+  @Deprecated public java.lang.Integer column8;
+  @Deprecated public java.lang.Integer column9;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -30,7 +30,7 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
   /**
    * All-args constructor.
    */
-  public Table(java.lang.CharSequence column0, java.lang.CharSequence column1, java.lang.CharSequence column2, java.lang.CharSequence column3, java.lang.CharSequence column4, java.lang.CharSequence column5, java.lang.CharSequence column6, java.lang.CharSequence column7, java.lang.CharSequence column8, java.lang.CharSequence column9) {
+  public Table(java.lang.Integer column0, java.lang.Integer column1, java.lang.Integer column2, java.lang.Integer column3, java.lang.Integer column4, java.lang.Integer column5, java.lang.Integer column6, java.lang.Integer column7, java.lang.Integer column8, java.lang.Integer column9) {
     this.column0 = column0;
     this.column1 = column1;
     this.column2 = column2;
@@ -64,16 +64,16 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: column0 = (java.lang.CharSequence)value$; break;
-    case 1: column1 = (java.lang.CharSequence)value$; break;
-    case 2: column2 = (java.lang.CharSequence)value$; break;
-    case 3: column3 = (java.lang.CharSequence)value$; break;
-    case 4: column4 = (java.lang.CharSequence)value$; break;
-    case 5: column5 = (java.lang.CharSequence)value$; break;
-    case 6: column6 = (java.lang.CharSequence)value$; break;
-    case 7: column7 = (java.lang.CharSequence)value$; break;
-    case 8: column8 = (java.lang.CharSequence)value$; break;
-    case 9: column9 = (java.lang.CharSequence)value$; break;
+    case 0: column0 = (java.lang.Integer)value$; break;
+    case 1: column1 = (java.lang.Integer)value$; break;
+    case 2: column2 = (java.lang.Integer)value$; break;
+    case 3: column3 = (java.lang.Integer)value$; break;
+    case 4: column4 = (java.lang.Integer)value$; break;
+    case 5: column5 = (java.lang.Integer)value$; break;
+    case 6: column6 = (java.lang.Integer)value$; break;
+    case 7: column7 = (java.lang.Integer)value$; break;
+    case 8: column8 = (java.lang.Integer)value$; break;
+    case 9: column9 = (java.lang.Integer)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -81,7 +81,7 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
   /**
    * Gets the value of the 'column0' field.
    */
-  public java.lang.CharSequence getColumn0() {
+  public java.lang.Integer getColumn0() {
     return column0;
   }
 
@@ -89,14 +89,14 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
    * Sets the value of the 'column0' field.
    * @param value the value to set.
    */
-  public void setColumn0(java.lang.CharSequence value) {
+  public void setColumn0(java.lang.Integer value) {
     this.column0 = value;
   }
 
   /**
    * Gets the value of the 'column1' field.
    */
-  public java.lang.CharSequence getColumn1() {
+  public java.lang.Integer getColumn1() {
     return column1;
   }
 
@@ -104,14 +104,14 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
    * Sets the value of the 'column1' field.
    * @param value the value to set.
    */
-  public void setColumn1(java.lang.CharSequence value) {
+  public void setColumn1(java.lang.Integer value) {
     this.column1 = value;
   }
 
   /**
    * Gets the value of the 'column2' field.
    */
-  public java.lang.CharSequence getColumn2() {
+  public java.lang.Integer getColumn2() {
     return column2;
   }
 
@@ -119,14 +119,14 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
    * Sets the value of the 'column2' field.
    * @param value the value to set.
    */
-  public void setColumn2(java.lang.CharSequence value) {
+  public void setColumn2(java.lang.Integer value) {
     this.column2 = value;
   }
 
   /**
    * Gets the value of the 'column3' field.
    */
-  public java.lang.CharSequence getColumn3() {
+  public java.lang.Integer getColumn3() {
     return column3;
   }
 
@@ -134,14 +134,14 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
    * Sets the value of the 'column3' field.
    * @param value the value to set.
    */
-  public void setColumn3(java.lang.CharSequence value) {
+  public void setColumn3(java.lang.Integer value) {
     this.column3 = value;
   }
 
   /**
    * Gets the value of the 'column4' field.
    */
-  public java.lang.CharSequence getColumn4() {
+  public java.lang.Integer getColumn4() {
     return column4;
   }
 
@@ -149,14 +149,14 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
    * Sets the value of the 'column4' field.
    * @param value the value to set.
    */
-  public void setColumn4(java.lang.CharSequence value) {
+  public void setColumn4(java.lang.Integer value) {
     this.column4 = value;
   }
 
   /**
    * Gets the value of the 'column5' field.
    */
-  public java.lang.CharSequence getColumn5() {
+  public java.lang.Integer getColumn5() {
     return column5;
   }
 
@@ -164,14 +164,14 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
    * Sets the value of the 'column5' field.
    * @param value the value to set.
    */
-  public void setColumn5(java.lang.CharSequence value) {
+  public void setColumn5(java.lang.Integer value) {
     this.column5 = value;
   }
 
   /**
    * Gets the value of the 'column6' field.
    */
-  public java.lang.CharSequence getColumn6() {
+  public java.lang.Integer getColumn6() {
     return column6;
   }
 
@@ -179,14 +179,14 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
    * Sets the value of the 'column6' field.
    * @param value the value to set.
    */
-  public void setColumn6(java.lang.CharSequence value) {
+  public void setColumn6(java.lang.Integer value) {
     this.column6 = value;
   }
 
   /**
    * Gets the value of the 'column7' field.
    */
-  public java.lang.CharSequence getColumn7() {
+  public java.lang.Integer getColumn7() {
     return column7;
   }
 
@@ -194,14 +194,14 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
    * Sets the value of the 'column7' field.
    * @param value the value to set.
    */
-  public void setColumn7(java.lang.CharSequence value) {
+  public void setColumn7(java.lang.Integer value) {
     this.column7 = value;
   }
 
   /**
    * Gets the value of the 'column8' field.
    */
-  public java.lang.CharSequence getColumn8() {
+  public java.lang.Integer getColumn8() {
     return column8;
   }
 
@@ -209,14 +209,14 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
    * Sets the value of the 'column8' field.
    * @param value the value to set.
    */
-  public void setColumn8(java.lang.CharSequence value) {
+  public void setColumn8(java.lang.Integer value) {
     this.column8 = value;
   }
 
   /**
    * Gets the value of the 'column9' field.
    */
-  public java.lang.CharSequence getColumn9() {
+  public java.lang.Integer getColumn9() {
     return column9;
   }
 
@@ -224,7 +224,7 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
    * Sets the value of the 'column9' field.
    * @param value the value to set.
    */
-  public void setColumn9(java.lang.CharSequence value) {
+  public void setColumn9(java.lang.Integer value) {
     this.column9 = value;
   }
 
@@ -249,16 +249,16 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<Table>
     implements org.apache.avro.data.RecordBuilder<Table> {
 
-    private java.lang.CharSequence column0;
-    private java.lang.CharSequence column1;
-    private java.lang.CharSequence column2;
-    private java.lang.CharSequence column3;
-    private java.lang.CharSequence column4;
-    private java.lang.CharSequence column5;
-    private java.lang.CharSequence column6;
-    private java.lang.CharSequence column7;
-    private java.lang.CharSequence column8;
-    private java.lang.CharSequence column9;
+    private java.lang.Integer column0;
+    private java.lang.Integer column1;
+    private java.lang.Integer column2;
+    private java.lang.Integer column3;
+    private java.lang.Integer column4;
+    private java.lang.Integer column5;
+    private java.lang.Integer column6;
+    private java.lang.Integer column7;
+    private java.lang.Integer column8;
+    private java.lang.Integer column9;
 
     /** Creates a new Builder */
     private Builder() {
@@ -356,12 +356,12 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /** Gets the value of the 'column0' field */
-    public java.lang.CharSequence getColumn0() {
+    public java.lang.Integer getColumn0() {
       return column0;
     }
     
     /** Sets the value of the 'column0' field */
-    public com.mlesniak.data.in.schema.Table.Builder setColumn0(java.lang.CharSequence value) {
+    public com.mlesniak.data.in.schema.Table.Builder setColumn0(java.lang.Integer value) {
       validate(fields()[0], value);
       this.column0 = value;
       fieldSetFlags()[0] = true;
@@ -381,12 +381,12 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /** Gets the value of the 'column1' field */
-    public java.lang.CharSequence getColumn1() {
+    public java.lang.Integer getColumn1() {
       return column1;
     }
     
     /** Sets the value of the 'column1' field */
-    public com.mlesniak.data.in.schema.Table.Builder setColumn1(java.lang.CharSequence value) {
+    public com.mlesniak.data.in.schema.Table.Builder setColumn1(java.lang.Integer value) {
       validate(fields()[1], value);
       this.column1 = value;
       fieldSetFlags()[1] = true;
@@ -406,12 +406,12 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /** Gets the value of the 'column2' field */
-    public java.lang.CharSequence getColumn2() {
+    public java.lang.Integer getColumn2() {
       return column2;
     }
     
     /** Sets the value of the 'column2' field */
-    public com.mlesniak.data.in.schema.Table.Builder setColumn2(java.lang.CharSequence value) {
+    public com.mlesniak.data.in.schema.Table.Builder setColumn2(java.lang.Integer value) {
       validate(fields()[2], value);
       this.column2 = value;
       fieldSetFlags()[2] = true;
@@ -431,12 +431,12 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /** Gets the value of the 'column3' field */
-    public java.lang.CharSequence getColumn3() {
+    public java.lang.Integer getColumn3() {
       return column3;
     }
     
     /** Sets the value of the 'column3' field */
-    public com.mlesniak.data.in.schema.Table.Builder setColumn3(java.lang.CharSequence value) {
+    public com.mlesniak.data.in.schema.Table.Builder setColumn3(java.lang.Integer value) {
       validate(fields()[3], value);
       this.column3 = value;
       fieldSetFlags()[3] = true;
@@ -456,12 +456,12 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /** Gets the value of the 'column4' field */
-    public java.lang.CharSequence getColumn4() {
+    public java.lang.Integer getColumn4() {
       return column4;
     }
     
     /** Sets the value of the 'column4' field */
-    public com.mlesniak.data.in.schema.Table.Builder setColumn4(java.lang.CharSequence value) {
+    public com.mlesniak.data.in.schema.Table.Builder setColumn4(java.lang.Integer value) {
       validate(fields()[4], value);
       this.column4 = value;
       fieldSetFlags()[4] = true;
@@ -481,12 +481,12 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /** Gets the value of the 'column5' field */
-    public java.lang.CharSequence getColumn5() {
+    public java.lang.Integer getColumn5() {
       return column5;
     }
     
     /** Sets the value of the 'column5' field */
-    public com.mlesniak.data.in.schema.Table.Builder setColumn5(java.lang.CharSequence value) {
+    public com.mlesniak.data.in.schema.Table.Builder setColumn5(java.lang.Integer value) {
       validate(fields()[5], value);
       this.column5 = value;
       fieldSetFlags()[5] = true;
@@ -506,12 +506,12 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /** Gets the value of the 'column6' field */
-    public java.lang.CharSequence getColumn6() {
+    public java.lang.Integer getColumn6() {
       return column6;
     }
     
     /** Sets the value of the 'column6' field */
-    public com.mlesniak.data.in.schema.Table.Builder setColumn6(java.lang.CharSequence value) {
+    public com.mlesniak.data.in.schema.Table.Builder setColumn6(java.lang.Integer value) {
       validate(fields()[6], value);
       this.column6 = value;
       fieldSetFlags()[6] = true;
@@ -531,12 +531,12 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /** Gets the value of the 'column7' field */
-    public java.lang.CharSequence getColumn7() {
+    public java.lang.Integer getColumn7() {
       return column7;
     }
     
     /** Sets the value of the 'column7' field */
-    public com.mlesniak.data.in.schema.Table.Builder setColumn7(java.lang.CharSequence value) {
+    public com.mlesniak.data.in.schema.Table.Builder setColumn7(java.lang.Integer value) {
       validate(fields()[7], value);
       this.column7 = value;
       fieldSetFlags()[7] = true;
@@ -556,12 +556,12 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /** Gets the value of the 'column8' field */
-    public java.lang.CharSequence getColumn8() {
+    public java.lang.Integer getColumn8() {
       return column8;
     }
     
     /** Sets the value of the 'column8' field */
-    public com.mlesniak.data.in.schema.Table.Builder setColumn8(java.lang.CharSequence value) {
+    public com.mlesniak.data.in.schema.Table.Builder setColumn8(java.lang.Integer value) {
       validate(fields()[8], value);
       this.column8 = value;
       fieldSetFlags()[8] = true;
@@ -581,12 +581,12 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /** Gets the value of the 'column9' field */
-    public java.lang.CharSequence getColumn9() {
+    public java.lang.Integer getColumn9() {
       return column9;
     }
     
     /** Sets the value of the 'column9' field */
-    public com.mlesniak.data.in.schema.Table.Builder setColumn9(java.lang.CharSequence value) {
+    public com.mlesniak.data.in.schema.Table.Builder setColumn9(java.lang.Integer value) {
       validate(fields()[9], value);
       this.column9 = value;
       fieldSetFlags()[9] = true;
@@ -609,16 +609,16 @@ public class Table extends org.apache.avro.specific.SpecificRecordBase implement
     public Table build() {
       try {
         Table record = new Table();
-        record.column0 = fieldSetFlags()[0] ? this.column0 : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.column1 = fieldSetFlags()[1] ? this.column1 : (java.lang.CharSequence) defaultValue(fields()[1]);
-        record.column2 = fieldSetFlags()[2] ? this.column2 : (java.lang.CharSequence) defaultValue(fields()[2]);
-        record.column3 = fieldSetFlags()[3] ? this.column3 : (java.lang.CharSequence) defaultValue(fields()[3]);
-        record.column4 = fieldSetFlags()[4] ? this.column4 : (java.lang.CharSequence) defaultValue(fields()[4]);
-        record.column5 = fieldSetFlags()[5] ? this.column5 : (java.lang.CharSequence) defaultValue(fields()[5]);
-        record.column6 = fieldSetFlags()[6] ? this.column6 : (java.lang.CharSequence) defaultValue(fields()[6]);
-        record.column7 = fieldSetFlags()[7] ? this.column7 : (java.lang.CharSequence) defaultValue(fields()[7]);
-        record.column8 = fieldSetFlags()[8] ? this.column8 : (java.lang.CharSequence) defaultValue(fields()[8]);
-        record.column9 = fieldSetFlags()[9] ? this.column9 : (java.lang.CharSequence) defaultValue(fields()[9]);
+        record.column0 = fieldSetFlags()[0] ? this.column0 : (java.lang.Integer) defaultValue(fields()[0]);
+        record.column1 = fieldSetFlags()[1] ? this.column1 : (java.lang.Integer) defaultValue(fields()[1]);
+        record.column2 = fieldSetFlags()[2] ? this.column2 : (java.lang.Integer) defaultValue(fields()[2]);
+        record.column3 = fieldSetFlags()[3] ? this.column3 : (java.lang.Integer) defaultValue(fields()[3]);
+        record.column4 = fieldSetFlags()[4] ? this.column4 : (java.lang.Integer) defaultValue(fields()[4]);
+        record.column5 = fieldSetFlags()[5] ? this.column5 : (java.lang.Integer) defaultValue(fields()[5]);
+        record.column6 = fieldSetFlags()[6] ? this.column6 : (java.lang.Integer) defaultValue(fields()[6]);
+        record.column7 = fieldSetFlags()[7] ? this.column7 : (java.lang.Integer) defaultValue(fields()[7]);
+        record.column8 = fieldSetFlags()[8] ? this.column8 : (java.lang.Integer) defaultValue(fields()[8]);
+        record.column9 = fieldSetFlags()[9] ? this.column9 : (java.lang.Integer) defaultValue(fields()[9]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

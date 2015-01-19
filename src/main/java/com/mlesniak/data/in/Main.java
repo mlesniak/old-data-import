@@ -12,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
 
+import java.io.IOException;
 import java.net.URI;
 
 @SpringBootApplication
@@ -37,18 +38,6 @@ public class Main implements CommandLineRunner {
     }
 
     private void writeParquetFile() throws Exception {
-        log.info("Creating objects");
-        Table table1 = new Table();
-        table1.setColumn0("value-0");
-        table1.setColumn1("value-1");
-        log.info("Table 1: {}", table1.toString());
-
-        Table table2 = new Table();
-        table2.setColumn0("t2-value-0");
-        table2.setColumn1("t2-value-1");
-        table2.setColumn2("t2-value-2");
-        log.info("Table 2: {}", table2.toString());
-
         String hdfsServer = env.getProperty("hdfsServer");
         String fileName = env.getProperty("fileName");
 
@@ -64,10 +53,33 @@ public class Main implements CommandLineRunner {
             hdfs.delete(outputPath, true);
         }
 
-        DataAvroParquetWriter<Table> writer = new DataAvroParquetWriter<>(outputPath, table1.getSchema());
+        DataAvroParquetWriter<Table> writer = new DataAvroParquetWriter<>(outputPath, Table.getClassSchema());
         log.info("Writing objects.");
-        writer.write(table1);
-        writer.write(table2);
+        writeObjects(writer);
+        log.info("Done with writing.");
         writer.close();
+    }
+
+    private void writeObjects(DataAvroParquetWriter<Table> writer) throws IOException {
+        int count = Integer.parseInt(env.getProperty("count"));
+        for (int i = 0; i < count; i++) {
+            Table table = Table.newBuilder()
+                    .setColumn0(randInt())
+                    .setColumn1(randInt())
+                    .setColumn2(randInt())
+                    .setColumn3(randInt())
+                    .setColumn4(randInt())
+                    .setColumn5(randInt())
+                    .setColumn6(randInt())
+                    .setColumn7(randInt())
+                    .setColumn8(randInt())
+                    .setColumn9(randInt())
+                    .build();
+            writer.write(table);
+        }
+    }
+
+    private Integer randInt() {
+        return (int)(Math.random() * Integer.MAX_VALUE);
     }
 }
