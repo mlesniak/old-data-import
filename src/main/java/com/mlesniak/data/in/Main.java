@@ -2,7 +2,6 @@ package com.mlesniak.data.in;
 
 import com.mlesniak.data.in.schema.Table;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
 
 import java.io.IOException;
-import java.net.URI;
 
 @SpringBootApplication
 public class Main implements CommandLineRunner {
@@ -43,15 +41,11 @@ public class Main implements CommandLineRunner {
 
         Configuration configuration = new Configuration();
         log.info("Connection to {}", hdfsServer);
-        FileSystem hdfs = FileSystem.get(new URI(hdfsServer), configuration);
         Path outputPath = new Path(hdfsServer + "/" + fileName);
 
-        // Remove file if already existing (for testing purposes).
-        log.info("Filename: {}", fileName);
-        if (hdfs.exists(outputPath)) {
-            log.info("Removing file");
-            hdfs.delete(outputPath, true);
-        }
+        // Add timestamp for uniqueness (since we use the file in a warehouse context).
+        outputPath = outputPath.suffix("-" + System.currentTimeMillis());
+        log.info("Filename {}", outputPath.getName());
 
         DataAvroParquetWriter<Table> writer = new DataAvroParquetWriter<>(outputPath, Table.getClassSchema());
         log.info("Writing objects.");
