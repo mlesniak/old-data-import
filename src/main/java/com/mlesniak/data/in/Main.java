@@ -45,13 +45,14 @@ public class Main implements CommandLineRunner {
 
         // Add timestamp for uniqueness (since we use the file in a warehouse context).
         outputPath = outputPath.suffix("-" + System.currentTimeMillis());
-        log.info("Filename {}", outputPath.getName());
+        log.info("Filename {}", outputPath.toUri().toString());
 
         DataAvroParquetWriter<Table> writer = new DataAvroParquetWriter<>(outputPath, Table.getClassSchema());
         log.info("Writing objects.");
         writeObjects(writer);
         log.info("Done with writing.");
         writer.close();
+        log.info("Done with closing (actual writing).");
     }
 
     private void writeObjects(DataAvroParquetWriter<Table> writer) throws IOException {
