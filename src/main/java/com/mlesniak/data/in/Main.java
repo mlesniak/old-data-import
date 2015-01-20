@@ -1,6 +1,7 @@
 package com.mlesniak.data.in;
 
 import com.mlesniak.data.in.schema.Table;
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.slf4j.Logger;
@@ -12,6 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 public class Main implements CommandLineRunner {
@@ -28,7 +32,27 @@ public class Main implements CommandLineRunner {
     public void run(String... args) throws Exception {
         log.info("Application started");
         try {
-            writeParquetFile();
+            int threads = Integer.parseInt(env.getProperty("threads"));
+            int tasks = Integer.parseInt(env.getProperty("tasks"));
+            log.info("Multithreading threads={}, tasks={}", threads, tasks);
+            ExecutorService pool = Executors.newFixedThreadPool(threads);
+            StopWatch stopWatch = new StopWatch();
+            stopWatch.start();
+            for (int i = 0; i < tasks; i++) {
+                pool.submit(() -> {
+                    try {
+                        log.info("Running thread {}", Thread.currentThread().getId());
+                        writeParquetFile();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+            pool.shutdown();
+            pool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+            stopWatch.stop();
+            long seconds = stopWatch.getTime() / 1000;
+            log.info("Writing took {} seconds", seconds);
         } catch (Exception e) {
             log.error("Exception: {}", e.getMessage());
         }
@@ -42,9 +66,10 @@ public class Main implements CommandLineRunner {
         Configuration configuration = new Configuration();
         log.info("Connection to {}", hdfsServer);
         Path outputPath = new Path(hdfsServer + "/" + fileName);
+        long id = Thread.currentThread().getId();
 
         // Add timestamp for uniqueness (since we use the file in a warehouse context).
-        outputPath = outputPath.suffix("-" + System.currentTimeMillis());
+        outputPath = outputPath.suffix("-" + System.currentTimeMillis()).suffix("-" + id);
         log.info("Filename {}", outputPath.toUri().toString());
 
         // Show impala statement which should be used to create the external table.
@@ -59,7 +84,7 @@ public class Main implements CommandLineRunner {
         writeObjects(writer);
         log.info("Done with writing.");
         writer.close();
-        log.info("Done with closing (actual writing)    .");
+        log.info("Done with closing (actual writing).");
     }
 
     private void writeObjects(DataAvroParquetWriter<Table> writer) throws IOException {
