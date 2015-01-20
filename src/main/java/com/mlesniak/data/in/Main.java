@@ -47,12 +47,19 @@ public class Main implements CommandLineRunner {
         outputPath = outputPath.suffix("-" + System.currentTimeMillis());
         log.info("Filename {}", outputPath.toUri().toString());
 
+        // Show impala statement which should be used to create the external table.
+        String impala = String.format("create external table '%1s' like parquet '%2s' stored as parquet location '%3s';",
+                env.getProperty("tableName"),
+                outputPath.toUri().getPath(),
+                env.getProperty("warehouse"));
+        log.info(impala);
+
         DataAvroParquetWriter<Table> writer = new DataAvroParquetWriter<>(outputPath, Table.getClassSchema());
         log.info("Writing objects.");
         writeObjects(writer);
         log.info("Done with writing.");
         writer.close();
-        log.info("Done with closing (actual writing).");
+        log.info("Done with closing (actual writing)    .");
     }
 
     private void writeObjects(DataAvroParquetWriter<Table> writer) throws IOException {

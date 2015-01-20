@@ -6,6 +6,13 @@ Small example to write a file to HDFS with parquet.
 
 The schema is defined in src/main/avro/table.avsc, generation with mvn generate-sources
 
+## Impala
+
+The statement to create an external Impala table is shown as a log message. It has to be executed just once. If you add
+additional data files, do not forget to use refresh as in
+
+    refresh <tableName>;
+
 ## Viewing
 
 Use https://github.com/Parquet/parquet-mr/tree/master/parquet-tools to show the compressed parquet file.
