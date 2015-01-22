@@ -2,7 +2,6 @@ package com.mlesniak.data.in;
 
 import com.mlesniak.data.in.schema.Table;
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 public class Main implements CommandLineRunner {
-    private Logger log = LoggerFactory.getLogger(Main.class);
+    private static Logger log = LoggerFactory.getLogger(Main.class);
 
     @Autowired
     private Environment env;
@@ -44,7 +43,7 @@ public class Main implements CommandLineRunner {
                         log.info("Running thread {}", Thread.currentThread().getId());
                         writeParquetFile();
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        log.error("Error running thread: {}", e.getMessage());
                     }
                 });
             }
@@ -63,7 +62,6 @@ public class Main implements CommandLineRunner {
         String hdfsServer = env.getProperty("hdfsServer");
         String fileName = env.getProperty("fileName");
 
-        Configuration configuration = new Configuration();
         log.info("Connection to {}", hdfsServer);
         Path outputPath = new Path(hdfsServer + "/" + fileName);
         long id = Thread.currentThread().getId();
