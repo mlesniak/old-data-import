@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 public class Main implements CommandLineRunner {
-    private final static Logger log = LoggerFactory.getLogger(Main.class);
+    private final static Logger LOG = LoggerFactory.getLogger(Main.class);
 
     @Autowired
     private Environment env;
@@ -29,21 +29,21 @@ public class Main implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        log.info("Application started");
+        LOG.info("Application started");
         try {
             int threads = Integer.parseInt(env.getProperty("threads"));
             int tasks = Integer.parseInt(env.getProperty("tasks"));
-            log.info("Multithreading threads={}, tasks={}", threads, tasks);
+            LOG.info("Multithreading threads={}, tasks={}", threads, tasks);
             ExecutorService pool = Executors.newFixedThreadPool(threads);
             StopWatch stopWatch = new StopWatch();
             stopWatch.start();
             for (int i = 0; i < tasks; i++) {
                 pool.submit(() -> {
                     try {
-                        log.info("Running thread {}", Thread.currentThread().getId());
+                        LOG.info("Running thread {}", Thread.currentThread().getId());
                         writeParquetFile();
                     } catch (Exception e) {
-                        log.error("Error running thread: {}", e.getMessage());
+                        LOG.error("Error running thread: {}", e.getMessage());
                     }
                 });
             }
@@ -51,38 +51,38 @@ public class Main implements CommandLineRunner {
             pool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
             stopWatch.stop();
             long seconds = stopWatch.getTime() / 1000;
-            log.info("Writing took {} seconds", seconds);
+            LOG.info("Writing took {} seconds", seconds);
         } catch (Exception e) {
-            log.error("Exception: {}", e.getMessage());
+            LOG.error("Exception: {}", e.getMessage());
         }
-        log.info("Application finished");
+        LOG.info("Application finished");
     }
 
     private void writeParquetFile() throws Exception {
         String hdfsServer = env.getProperty("hdfsServer");
         String fileName = env.getProperty("fileName");
 
-        log.info("Connection to {}", hdfsServer);
+        LOG.info("Connection to {}", hdfsServer);
         Path outputPath = new Path(hdfsServer + "/" + fileName);
         long id = Thread.currentThread().getId();
 
         // Add timestamp for uniqueness (since we use the file in a warehouse context).
         outputPath = outputPath.suffix("-" + System.currentTimeMillis()).suffix("-" + id);
-        log.info("Filename {}", outputPath.toUri().toString());
+        LOG.info("Filename {}", outputPath.toUri().toString());
 
         // Show impala statement which should be used to create the external table.
         String impala = String.format("create external table '%1s' like parquet '%2s' stored as parquet location '%3s';",
                 env.getProperty("tableName"),
                 outputPath.toUri().getPath(),
                 env.getProperty("warehouse"));
-        log.info(impala);
+        LOG.info(impala);
 
         DataAvroParquetWriter<Table> writer = new DataAvroParquetWriter<>(outputPath, Table.getClassSchema());
-        log.info("Writing objects.");
+        LOG.info("Writing objects.");
         writeObjects(writer);
-        log.info("Done with writing.");
+        LOG.info("Done with writing.");
         writer.close();
-        log.info("Done with closing (actual writing).");
+        LOG.info("Done with closing (actual writing).");
     }
 
     private void writeObjects(DataAvroParquetWriter<Table> writer) throws IOException {
