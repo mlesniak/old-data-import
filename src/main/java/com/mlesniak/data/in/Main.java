@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 public class Main implements CommandLineRunner {
-    private static Logger log = LoggerFactory.getLogger(Main.class);
+    private final static Logger log = LoggerFactory.getLogger(Main.class);
 
     @Autowired
     private Environment env;
