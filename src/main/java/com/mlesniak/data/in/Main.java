@@ -1,6 +1,7 @@
 package com.mlesniak.data.in;
 
 import com.mlesniak.data.in.schema.Table;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.hadoop.fs.Path;
 import org.slf4j.Logger;
@@ -20,12 +21,15 @@ import java.util.concurrent.TimeUnit;
 @SpringBootApplication
 public class Main implements CommandLineRunner {
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
+    public static final int COLUMNS = 10;
 
     @Autowired
     private Environment env;
 
     @Value("${maxValue}")
     private int maxValue;
+
+    private int[] maxValues = new int[COLUMNS];
 
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
         SpringApplication.run(Main.class, args);
@@ -35,6 +39,7 @@ public class Main implements CommandLineRunner {
     public void run(String... args) throws Exception {
         LOG.info("Application started");
         try {
+            determineMaxColumns();
             int threads = Integer.parseInt(env.getProperty("threads"));
             int tasks = Integer.parseInt(env.getProperty("tasks"));
             LOG.info("Multithreading threads={}, tasks={}", threads, tasks);
@@ -60,6 +65,17 @@ public class Main implements CommandLineRunner {
             LOG.error("Exception: {}", e.getMessage());
         }
         LOG.info("Application finished");
+    }
+
+    private void determineMaxColumns() {
+        for (int i = 0; i < COLUMNS; ++i) {
+            String propValue = env.getProperty("maxValue." + i);
+            if (StringUtils.isEmpty(propValue)) {
+                maxValues[i] = maxValue;
+            } else {
+                maxValues[i] = Integer.parseInt(propValue);
+            }
+        }
     }
 
     private void writeParquetFile() throws Exception {
@@ -109,6 +125,6 @@ public class Main implements CommandLineRunner {
     }
 
     private Integer randInt(int column) {
-        return (int)(Math.random() * maxValue);
+        return (int) (Math.random() * maxValues[column]);
     }
 }
