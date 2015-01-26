@@ -6,6 +6,7 @@ import org.apache.hadoop.fs.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +23,9 @@ public class Main implements CommandLineRunner {
 
     @Autowired
     private Environment env;
+
+    @Value("${maxValue}")
+    private int maxValue;
 
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
         SpringApplication.run(Main.class, args);
@@ -71,7 +75,7 @@ public class Main implements CommandLineRunner {
         LOG.info("Filename {}", outputPath.toUri().toString());
 
         // Show impala statement which should be used to create the external table.
-        String impala = String.format("create external table '%1s' like parquet '%2s' stored as parquet location '%3s';",
+        String impala = String.format("create external table %1s like parquet '%2s' stored as parquet location '%3s';",
                 env.getProperty("tableName"),
                 outputPath.toUri().getPath(),
                 env.getProperty("warehouse"));
@@ -89,22 +93,22 @@ public class Main implements CommandLineRunner {
         int count = Integer.parseInt(env.getProperty("count"));
         for (int i = 0; i < count; i++) {
             Table table = Table.newBuilder()
-                    .setColumn0(randInt())
-                    .setColumn1(randInt())
-                    .setColumn2(randInt())
-                    .setColumn3(randInt())
-                    .setColumn4(randInt())
-                    .setColumn5(randInt())
-                    .setColumn6(randInt())
-                    .setColumn7(randInt())
-                    .setColumn8(randInt())
-                    .setColumn9(randInt())
+                    .setColumn0(randInt(0))
+                    .setColumn1(randInt(1))
+                    .setColumn2(randInt(2))
+                    .setColumn3(randInt(3))
+                    .setColumn4(randInt(4))
+                    .setColumn5(randInt(5))
+                    .setColumn6(randInt(6))
+                    .setColumn7(randInt(7))
+                    .setColumn8(randInt(8))
+                    .setColumn9(randInt(9))
                     .build();
             writer.write(table);
         }
     }
 
-    private Integer randInt() {
-        return (int)(Math.random() * Integer.MAX_VALUE);
+    private Integer randInt(int column) {
+        return (int)(Math.random() * maxValue);
     }
 }
